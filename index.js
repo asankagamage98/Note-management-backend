@@ -5,6 +5,7 @@ const { dbConnect } = require("./src/utils/dbConnection");
 const bodyParser = require("body-parser");
 dbConnect();
 
+const noteRouter = require("./src/routes/note.router");
 
 app = express();
 
@@ -18,7 +19,7 @@ app.get("/", (req, res) => {
   res.send(" Unwir  Assessment Service");
 });
 
-
+app.use("/api/note", noteRouter);
 
 
 const PORT = process.env.PORT;
