@@ -6,7 +6,23 @@ const Note = require("../models/note.model")
 // Retrieves all notes from the database
 const getAll = async (req, res) => {
     try {
-        const note = await Note.find();
+        const { search, sortBy } = req.query;
+
+        const searchCriteria = {};
+        if (search) {
+            searchCriteria.$or = [
+                { title: { $regex: search, $options: 'i' } },
+                { content: { $regex: search, $options: 'i' } }
+            ];
+        }
+
+        let sortCriteria = {};
+        if (sortBy) {
+            const [field, order] = sortBy.split(':');
+            sortCriteria[field] = order === 'desc' ? -1 : 1;
+        }
+
+        const note = await Note.find(searchCriteria).sort(sortCriteria);
         res.status(200).json(note);
     } catch (err) {
         res.status(500).json(err);
