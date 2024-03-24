@@ -1,5 +1,7 @@
+// Import the Note model
 const Note = require('../models/note.model')
 
+//  retrieve a note by its ID
 const getById = async (id) => {
     try {
         return await Note.findById(id)
@@ -8,6 +10,7 @@ const getById = async (id) => {
     }
 }
 
+// create a new note
 const create = async (data) => {
     try {
         return await new Note(data).save()
@@ -16,6 +19,7 @@ const create = async (data) => {
     }
 }
 
+// update an existing note by its ID
 const update = async (id, data) => {
     try {
         return await Note.findByIdAndUpdate(id, data)
@@ -24,6 +28,7 @@ const update = async (id, data) => {
     }
 }
 
+// remove a note by its ID
 const remove = async (id) => {
     try {
         return await Note.findByIdAndDelete(id)
@@ -32,6 +37,7 @@ const remove = async (id) => {
     }
 }
 
+// functions for use in other files
 module.exports = {
     getById,
     create,

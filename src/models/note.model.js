@@ -1,5 +1,6 @@
 const { Schema, default: mongoose } = require('mongoose')
 
+// Define the schema for a note
 const noteSchema = new Schema(
     {
         title: {
@@ -16,5 +17,6 @@ const noteSchema = new Schema(
         timestamps: true,
     }
 )
+// Create a model based on the schema
 const Note = mongoose.model('Note', noteSchema)
 module.exports = Note
